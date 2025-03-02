@@ -8,39 +8,89 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='ImageUpload',
+            name="ImageUpload",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(upload_to='uploads/')),
-                ('uploaded_at', models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("image", models.ImageField(upload_to="uploads/")),
+                ("uploaded_at", models.DateTimeField(auto_now_add=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Prediction',
+            name="Prediction",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('text', models.TextField(blank=True, max_length=500, null=True)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='predictions/')),
-                ('likes', models.IntegerField(default=0)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('tag', models.CharField(choices=[('philosophical', 'Философское'), ('funny', 'Смешное'), ('inspirational', 'Жизнеутверждающее')], default='philosophical', max_length=20)),
-                ('avatar', models.ImageField(blank=True, null=True, upload_to='avatars/')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("text", models.TextField(blank=True, max_length=500, null=True)),
+                (
+                    "image",
+                    models.ImageField(blank=True, null=True, upload_to="predictions/"),
+                ),
+                ("likes", models.IntegerField(default=0)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "tag",
+                    models.CharField(
+                        choices=[
+                            ("philosophical", "Философское"),
+                            ("funny", "Смешное"),
+                            ("inspirational", "Жизнеутверждающее"),
+                        ],
+                        default="philosophical",
+                        max_length=20,
+                    ),
+                ),
+                (
+                    "avatar",
+                    models.ImageField(blank=True, null=True, upload_to="avatars/"),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('username', models.CharField(max_length=100)),
-                ('text', models.TextField(max_length=300)),
-                ('avatar', models.ImageField(blank=True, null=True, upload_to='avatars/')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('prediction', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='catapp.prediction')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("username", models.CharField(max_length=100)),
+                ("text", models.TextField(max_length=300)),
+                (
+                    "avatar",
+                    models.ImageField(blank=True, null=True, upload_to="avatars/"),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "prediction",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to="catapp.prediction",
+                    ),
+                ),
             ],
         ),
     ]
