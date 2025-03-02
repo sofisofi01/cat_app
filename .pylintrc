@@ -25,7 +25,6 @@ single-line-if-stmt=no
 
 # Автоматизация отступов и пробелов
 indent-string='    '  # Используйте 4 пробела для отступов
-space-around-operators=yes  # Разрешить пробелы вокруг операторов
 
 [MESSAGES CONTROL]
 # Отключить некоторые сообщения
