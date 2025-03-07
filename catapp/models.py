@@ -5,6 +5,14 @@ class PredictionTag(models.TextChoices):
     PHILOSOPHICAL = "philosophical", "Философское"
     FUNNY = "funny", "Смешное"
     INSPIRATIONAL = "inspirational", "Жизнеутверждающее"
+    DOMESTIC = "domestic", "Домашнее"
+    RELAX = "relax", "Релакс"
+    DREAMS = "dreams", "Мечты"
+    TRIVIAL = "trivial", "Мелочи"
+    NOSTALGIA = "nostalgia", "Ностальгия"
+    MYSTERIOUS = "mysterious", "Загадочное"
+    FATE = "fate", "Судьба"
+    EVERYDAY = "everyday", "Бытовое"
 
 
 class Prediction(models.Model):
