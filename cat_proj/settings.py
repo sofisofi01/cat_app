@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 import os
+from pathlib import Path
+
+from decouple import config
 
 from decouple import config
 
