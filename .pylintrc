@@ -1,0 +1,8 @@
+[MASTER]
+load-plugins=pylint_django
+
+[DJANGO]
+django-settings-module=cat_proj.settings
+
+[MASTER]
+files_to_check=catapp/

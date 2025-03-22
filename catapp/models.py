@@ -44,7 +44,7 @@ class Comment(models.Model):
 
 
 class ImageUpload(models.Model):
-    image = models.ImageField(upload_to="uploads/")
+    image = models.ImageField(upload_to="")
     uploaded_at = models.DateTimeField(auto_now_add=True)
     name = models.TextField(max_length=300)
     tag = models.CharField(
