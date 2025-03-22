@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Prediction, Comment, ImageUpload
+
+from .models import Comment, ImageUpload, Prediction
 
 
 class PredictionAdmin(admin.ModelAdmin):
