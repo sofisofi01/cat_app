@@ -59,4 +59,6 @@
 ## Дизайн
 [Посмотреть дизайн в Figma](https://www.figma.com/design/WuEwUYjqiPoeyDRd5MV9TK/%D1%81%D1%8B%D1%81?t=YQhwwr1Mp4BeauC8-0)
 
+**
+На данный момент админка задеплоена по данному хосту https://sofisofi01.pythonanywhere.com/admin/
 ---
