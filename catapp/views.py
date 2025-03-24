@@ -253,11 +253,16 @@ def get_all_predictions(request):
             "tag": prediction.tag,
             "avatar": prediction.avatar.url if prediction.avatar else None,
         }
-        for prediction in predictions
+        for prediction in page  # Используем page вместо predictions
     ]
 
     return JsonResponse(
-        {"predictions": predictions_data}, json_dumps_params={"ensure_ascii": False}
+        {
+            "predictions": predictions_data,
+            "total_pages": paginator.num_pages,
+            "current_page": page.number,
+        },
+        json_dumps_params={"ensure_ascii": False},
     )
 
 
