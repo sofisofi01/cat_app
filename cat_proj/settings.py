@@ -12,11 +12,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True  # Включите для локальной разработки
+DEBUG = False  # Включите для локальной разработки
 
 # Разрешенные хосты
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]  # Для локальной разработки
-# ALLOWED_HOSTS = ["sofisofi01.pythonanywhere.com"]  # Для продакшена
+#ALLOWED_HOSTS = ["sofisofi01.pythonanywhere.com"]  # Для продакшена
 
 # Добавлять ли завершающий слэш
 APPEND_SLASH = False
@@ -111,9 +111,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")  # Папка для медиаф
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Настройки для HTTPS (отключите для локальной разработки)
-# SECURE_HSTS_SECONDS = 31536000  # 1 год
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_HSTS_PRELOAD = True
-# SECURE_SSL_REDIRECT = True
-# SESSION_COOKIE_SECURE = True
-# CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 31536000  # 1 год
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

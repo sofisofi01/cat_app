@@ -4,7 +4,6 @@ from rest_framework.test import APITestCase
 from .models import Prediction, Comment, ImageUpload, PredictionTag
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-# Юнит-тесты для моделей
 class PredictionModelTest(TestCase):
     def test_create_prediction_with_text(self):
         prediction = Prediction.objects.create(
@@ -88,8 +87,6 @@ class ImageUploadModelTest(TestCase):
         )
         self.assertEqual(str(image_upload), f"Image {image_upload.id}")
 
-
-# Интеграционные тесты для API
 class PredictionAPITest(APITestCase):
     def setUp(self):
         self.prediction = Prediction.objects.create(

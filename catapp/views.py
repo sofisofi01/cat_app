@@ -253,7 +253,7 @@ def get_all_predictions(request):
             "tag": prediction.tag,
             "avatar": prediction.avatar.url if prediction.avatar else None,
         }
-        for prediction in page  # Используем page вместо predictions
+        for prediction in predictions
     ]
 
     return JsonResponse(
