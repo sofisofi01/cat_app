@@ -30,7 +30,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["https://sofisofi01.pythonanywhere.com/"]
+ALLOWED_HOSTS = ["sofisofi01.pythonanywhere.com"]
 
 
 # Application definition
