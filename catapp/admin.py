@@ -1,43 +1,77 @@
 from django.contrib import admin
+from django.utils.html import format_html
 from .models import Prediction, Comment, ImageUpload
 
-# Настройка админки для модели Prediction
 @admin.register(Prediction)
 class PredictionAdmin(admin.ModelAdmin):
-    list_display = ("id", "text", "tag", "likes", "created_at", "image_tag")  # Отображаемые поля
-    list_filter = ("tag", "created_at")  # Фильтры
-    search_fields = ("text", "tag")  # Поиск по полям
-    readonly_fields = ("image_tag",)  # Поле только для чтения (изображение)
+    list_display = ('id', 'text_preview', 'tag', 'likes', 'created_at', 'image_preview')
+    list_filter = ('tag', 'created_at')
+    search_fields = ('text', 'tag')
+    readonly_fields = ('image_preview', 'avatar_preview')
+    date_hierarchy = 'created_at'
+    list_per_page = 20
 
-    # Метод для отображения изображения
-    def image_tag(self, obj):
+    fieldsets = (
+        (None, {
+            'fields': ('text', 'tag', 'likes')
+        }),
+        ('Media', {
+            'fields': ('image', 'image_preview', 'avatar', 'avatar_preview')
+        }),
+    )
+
+    def text_preview(self, obj):
+        return obj.text[:50] + '...' if obj.text else '-'
+    text_preview.short_description = 'Text'
+
+    def image_preview(self, obj):
         if obj.image:
-            return f'<img src="{obj.image.url}" width="150" height="auto" />'
-        return "No Image"
+            return format_html('<img src="{}" width="150" style="max-height: 100px;" />', obj.image.url)
+        return "-"
+    image_preview.short_description = 'Image'
 
-    image_tag.short_description = "Image Preview"  # Название колонки
-    image_tag.allow_tags = True  # Разрешить HTML-теги
+    def avatar_preview(self, obj):
+        if obj.avatar:
+            return format_html('<img src="{}" width="50" style="border-radius: 50%;" />', obj.avatar.url)
+        return "-"
+    avatar_preview.short_description = 'Avatar'
 
-# Настройка админки для модели Comment
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ("id", "username", "text", "prediction", "created_at")  # Отображаемые поля
-    list_filter = ("prediction", "created_at")  # Фильтры
-    search_fields = ("username", "text")  # Поиск по полям
+    list_display = ('id', 'username', 'text_preview', 'prediction_link', 'created_at')
+    list_filter = ('created_at', 'prediction__tag')  # Фильтр по тегу предсказания
+    search_fields = ('username', 'text', 'prediction__text')
+    raw_id_fields = ('prediction',)
+    list_per_page = 30
+    date_hierarchy = 'created_at'
 
-# Настройка админки для модели ImageUpload
+    def text_preview(self, obj):
+        return obj.text[:100] + '...' if obj.text else '-'
+    text_preview.short_description = 'Comment'
+
+    def prediction_link(self, obj):
+        if obj.prediction:
+            return format_html('<a href="/admin/catapp/prediction/{}/change/">{}</a>', 
+                             obj.prediction.id, 
+                             obj.prediction.text[:50] + '...' if obj.prediction.text else f'Prediction #{obj.prediction.id}')
+        return "-"
+    prediction_link.short_description = 'Prediction'
+
 @admin.register(ImageUpload)
 class ImageUploadAdmin(admin.ModelAdmin):
-    list_display = ("id", "name", "tag", "uploaded_at", "image_tag")  # Отображаемые поля
-    list_filter = ("tag", "uploaded_at")  # Фильтры
-    search_fields = ("name", "tag")  # Поиск по полям
-    readonly_fields = ("image_tag",)  # Поле только для чтения (изображение)
+    list_display = ('id', 'name_preview', 'tag', 'uploaded_at', 'image_preview')
+    list_filter = ('tag', 'uploaded_at')  # Фильтры по тегу и дате
+    search_fields = ('name', 'tag')
+    readonly_fields = ('image_preview',)
+    list_per_page = 20
+    date_hierarchy = 'uploaded_at'
 
-    # Метод для отображения изображения
-    def image_tag(self, obj):
+    def name_preview(self, obj):
+        return obj.name[:50] + '...' if obj.name else '-'
+    name_preview.short_description = 'Name'
+
+    def image_preview(self, obj):
         if obj.image:
-            return f'<img src="{obj.image.url}" width="150" height="auto" />'
-        return "No Image"
-
-    image_tag.short_description = "Image Preview"  # Название колонки
-    image_tag.allow_tags = True  # Разрешить HTML-теги
+            return format_html('<img src="{}" width="200" style="max-height: 150px;" />', obj.image.url)
+        return "-"
+    image_preview.short_description = 'Image'
