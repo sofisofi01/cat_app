@@ -43,8 +43,8 @@ class Comment(models.Model):
         return f"Комментарий от {self.username}"
 
     class Meta:
-        verbose_name = "Комментарий"
-        verbose_name_plural = "Комментарии"
+        verbose_name = "Comments"
+        verbose_name_plural = "Comments"
         ordering = ['-created_at']  # Сортировка по умолчанию
 
 class ImageUpload(models.Model):
@@ -62,6 +62,6 @@ class ImageUpload(models.Model):
         return self.name or f"Изображение {self.id}"
 
     class Meta:
-        verbose_name = "Загруженное изображение"
-        verbose_name_plural = "Загруженные изображения"
+        verbose_name = "Image upload"
+        verbose_name_plural = "Image upload"
         ordering = ['-uploaded_at']
