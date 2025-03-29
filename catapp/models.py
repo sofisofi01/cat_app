@@ -33,7 +33,7 @@ class Comment(models.Model):
         Prediction, 
         related_name="comments", 
         on_delete=models.CASCADE,
-        verbose_name="Предсказание"  # Добавлено для удобства
+        verbose_name="Предсказание" 
     )
     username = models.CharField(max_length=100, verbose_name="Имя пользователя")
     text = models.TextField(max_length=300, verbose_name="Текст")
@@ -45,12 +45,12 @@ class Comment(models.Model):
     class Meta:
         verbose_name = "Comments"
         verbose_name_plural = "Comments"
-        ordering = ['-created_at']  # Сортировка по умолчанию
+        ordering = ['-created_at'] 
 
 class ImageUpload(models.Model):
     image = models.ImageField(upload_to="uploads/%Y/%m/%d/", verbose_name="Изображение")
     uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата загрузки")
-    name = models.CharField(max_length=300, verbose_name="Название")  # Изменено с TextField
+    name = models.CharField(max_length=300, verbose_name="Название")
     tag = models.CharField(
         max_length=20,
         choices=PredictionTag.choices,

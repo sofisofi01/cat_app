@@ -35,7 +35,6 @@ class PredictionModelTest(TestCase):
         """Проверка сортировки по умолчанию"""
         p1 = Prediction.objects.create(text="First")
         p2 = Prediction.objects.create(text="Second")
-        # Сортировка должна быть по created_at (новые сначала)
         self.assertEqual(
             list(Prediction.objects.order_by('-created_at')), 
             [p2, p1]
