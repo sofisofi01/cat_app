@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class PredictionTag(models.TextChoices):
     PHILOSOPHICAL = "philosophical", "Философское"
     FUNNY = "funny", "Смешное"
@@ -13,7 +12,6 @@ class PredictionTag(models.TextChoices):
     MYSTERIOUS = "mysterious", "Загадочное"
     FATE = "fate", "Судьба"
     EVERYDAY = "everyday", "Бытовое"
-
 
 class Prediction(models.Model):
     text = models.TextField(null=True, blank=True, max_length=500)
@@ -30,28 +28,40 @@ class Prediction(models.Model):
     def __str__(self):
         return self.text[:50] if self.text else f"Image Prediction {self.id}"
 
-
 class Comment(models.Model):
     prediction = models.ForeignKey(
-        Prediction, related_name="comments", on_delete=models.CASCADE
+        Prediction, 
+        related_name="comments", 
+        on_delete=models.CASCADE,
+        verbose_name="Предсказание"  # Добавлено для удобства
     )
-    username = models.CharField(max_length=100)
-    text = models.TextField(max_length=300)
-    created_at = models.DateTimeField(auto_now_add=True)
+    username = models.CharField(max_length=100, verbose_name="Имя пользователя")
+    text = models.TextField(max_length=300, verbose_name="Текст")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
 
     def __str__(self):
-        return f"Comment by {self.username}"
+        return f"Комментарий от {self.username}"
 
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
+        ordering = ['-created_at']  # Сортировка по умолчанию
 
 class ImageUpload(models.Model):
-    image = models.ImageField(upload_to="")
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-    name = models.TextField(max_length=300)
+    image = models.ImageField(upload_to="uploads/%Y/%m/%d/", verbose_name="Изображение")
+    uploaded_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата загрузки")
+    name = models.CharField(max_length=300, verbose_name="Название")  # Изменено с TextField
     tag = models.CharField(
         max_length=20,
         choices=PredictionTag.choices,
         default=PredictionTag.PHILOSOPHICAL,
+        verbose_name="Тег"
     )
 
     def __str__(self):
-        return f"Image {self.id}"
+        return self.name or f"Изображение {self.id}"
+
+    class Meta:
+        verbose_name = "Загруженное изображение"
+        verbose_name_plural = "Загруженные изображения"
+        ordering = ['-uploaded_at']
