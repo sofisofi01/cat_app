@@ -15,8 +15,8 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = False  # Включите для локальной разработки
 
 # Разрешенные хосты
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]  # Для локальной разработки
-#ALLOWED_HOSTS = ["sofisofi01.pythonanywhere.com"]  # Для продакшена
+#ALLOWED_HOSTS = ["127.0.0.1", "localhost"]  # Для локальной разработки
+ALLOWED_HOSTS = ["sofisofi01.pythonanywhere.com"]  # Для продакшена
 
 # Добавлять ли завершающий слэш
 APPEND_SLASH = False
@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "catapp",
     "drf_yasg",
+    "corsheaders"
 ]
 
 MIDDLEWARE = [
