@@ -257,7 +257,12 @@ def get_all_predictions(request):
     ]
 
     return JsonResponse(
-        {"predictions": predictions_data}, json_dumps_params={"ensure_ascii": False}
+        {
+            "predictions": predictions_data,
+            "total_pages": paginator.num_pages,
+            "current_page": page.number,
+        },
+        json_dumps_params={"ensure_ascii": False},
     )
 
 
