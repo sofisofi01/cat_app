@@ -109,7 +109,3 @@ class ImageUploadAdmin(admin.ModelAdmin):
             )
         return "-"
     image_preview.short_description = 'Image Preview'
-        if obj.image:
-            return format_html('<img src="{}" width="200" style="max-height: 150px;" />', obj.image.url)
-        return "-"
-    image_preview.short_description = 'Image'
